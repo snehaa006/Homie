@@ -8,6 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowLeft, Search, Star, MapPin, Wifi, Car, Utensils, Shirt, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import ContactOwnerDialog from '@/components/Maps/ContactOwnerDialog';
+import ScheduleVisitDialog from '@/components/Maps/ScheduleVisitDialog';
 
 const PGFinder: React.FC = () => {
   const navigate = useNavigate();
@@ -32,7 +34,12 @@ const PGFinder: React.FC = () => {
       amenities: ['Wi-Fi', 'AC', 'Laundry', 'Cooking', 'Parking'],
       reviews: 45,
       description: 'Modern PG with excellent facilities and great locality connectivity',
-      localityInfo: 'Tech hub area with easy metro access and safe environment'
+      localityInfo: 'Tech hub area with easy metro access and safe environment',
+      ownerName: 'Mrs. Sunitha',
+      ownerPhone: '+91-9876543210',
+      ownerEmail: 'sunitha@sunshineapg.com',
+      address: '123 Koramangala Main Road, Bangalore, Karnataka 560034',
+      coordinates: [77.6309, 12.9279] as [number, number]
     },
     {
       id: 2,
@@ -46,7 +53,12 @@ const PGFinder: React.FC = () => {
       amenities: ['Wi-Fi', 'Meals', 'Laundry', 'Security'],
       reviews: 32,
       description: 'Homely atmosphere with nutritious meals and caring staff',
-      localityInfo: 'Peaceful residential area with good shopping and dining options'
+      localityInfo: 'Peaceful residential area with good shopping and dining options',
+      ownerName: 'Mr. Rajesh Kumar',
+      ownerPhone: '+91-9876543211',
+      ownerEmail: 'rajesh@cozycornerpg.com',
+      address: '456 HSR Layout Sector 7, Bangalore, Karnataka 560102',
+      coordinates: [77.6410, 12.9081] as [number, number]
     },
     {
       id: 3,
@@ -60,7 +72,12 @@ const PGFinder: React.FC = () => {
       amenities: ['Wi-Fi', 'AC', 'Gym', 'Laundry', 'Cooking', 'Swimming Pool'],
       reviews: 67,
       description: 'Premium accommodation with luxury amenities and prime location',
-      localityInfo: 'Vibrant area with pubs, restaurants, and shopping centers nearby'
+      localityInfo: 'Vibrant area with pubs, restaurants, and shopping centers nearby',
+      ownerName: 'Ms. Priya Nair',
+      ownerPhone: '+91-9876543212',
+      ownerEmail: 'priya@elitehostel.com',
+      address: '789 Indiranagar 100 Feet Road, Bangalore, Karnataka 560038',
+      coordinates: [77.6412, 12.9784] as [number, number]
     }
   ];
 
@@ -281,12 +298,25 @@ const PGFinder: React.FC = () => {
                       >
                         View Details
                       </Button>
-                      <Button variant="outline" className="w-full glass-card">
-                        Contact Owner
-                      </Button>
-                      <Button variant="ghost" className="w-full text-primary">
-                        Schedule Visit
-                      </Button>
+                      <ContactOwnerDialog
+                        pgName={pg.name}
+                        ownerName={pg.ownerName}
+                        ownerPhone={pg.ownerPhone}
+                        ownerEmail={pg.ownerEmail}
+                      >
+                        <Button variant="outline" className="w-full glass-card">
+                          Contact Owner
+                        </Button>
+                      </ContactOwnerDialog>
+                      <ScheduleVisitDialog
+                        pgName={pg.name}
+                        pgAddress={pg.address}
+                        coordinates={pg.coordinates}
+                      >
+                        <Button variant="ghost" className="w-full text-primary">
+                          Schedule Visit
+                        </Button>
+                      </ScheduleVisitDialog>
                     </div>
                   </div>
                 </div>
